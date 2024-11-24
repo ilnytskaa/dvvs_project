@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('postgres://postgres:qqwwee112233@localhost:5432/web_dvvs', {
+const sequelize = new Sequelize('postgres://postgres:1111@localhost:5432/dvvs_db', {
     dialect: 'postgres',
 });
 
@@ -21,3 +21,9 @@ const Post = sequelize.define('post', {
 });
 
 module.exports = { Post, sequelize };
+
+sequelize.sync({ force: true }) // force: true перезавантажить таблицю, якщо вона існує
+    .then(() => {
+        console.log('Database & table created!');
+    })
+    .catch(err => console.error(err));

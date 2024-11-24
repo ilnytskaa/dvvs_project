@@ -12,5 +12,9 @@ app.use(cors());
 
 app.use('/', postRoutes);
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the homepage, Iryna!');
+});
+
 const PORT =  8080;
 app.listen(PORT, () => console.log(`Server is connected on ${PORT}`));

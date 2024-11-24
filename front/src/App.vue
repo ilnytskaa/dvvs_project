@@ -6,15 +6,15 @@
       <h2>Create/Edit Post</h2>
       <form @submit.prevent="savePost">
         <label for="title">Title:</label>
-        <input type="text" v-model="newPost.title" required>
+        <input type="text" v-model="newPost.title" required />
 
         <label for="description">Description:</label>
         <textarea v-model="newPost.description" required></textarea>
 
         <label for="author">Author:</label>
-        <input type="text" v-model="newPost.author" required>
+        <input type="text" v-model="newPost.author" required />
 
-        <button type="submit">Save Post</button>
+        <button type="submit" class="btn-save">Save Post</button>
       </form>
     </div>
 
@@ -22,9 +22,13 @@
       <h2>All Posts</h2>
       <ul>
         <li v-for="(post, index) in posts" :key="index" class="post-item">
-          <strong>{{ post.title }}</strong> - {{ post.description }} - {{ post.author }}
-          <button @click="editPost(index)">Edit</button>
-          <button @click="removePost(index)">Remove</button>
+          <div class="post-title">{{ post.title }}</div>
+          <div class="post-description">{{ post.description }}</div>
+          <div class="post-author">Author: {{ post.author }}</div>
+          <div class="post-actions">
+            <button @click="editPost(index)" class="btn-edit">Edit</button>
+            <button @click="removePost(index)" class="btn-remove">Remove</button>
+          </div>
         </li>
       </ul>
     </div>
@@ -87,68 +91,109 @@ onMounted(fetchPosts);
 </script>
 
 <style>
-body{
-  background: #6e6e6e;
+body {
+  background-color: #ffe4e1; /* Ніжно-рожевий фон */
+  color: #8b004f; /* Темно-рожевий текст */
+  font-family: Arial, sans-serif;
 }
-h1{
-  color: #000000;
-  font-size: 60px;
+
+h1 {
+  color: #d10068; /* Насичений рожевий */
+  text-align: center;
+  font-size: 36px;
 }
+
 .post-management {
   max-width: 800px;
   margin: auto;
+  padding: 20px;
 }
 
 .post-form, .all-posts {
-  background-color: #f9f9f9;
+  background-color: #ffc1cc; /* Світло-рожевий фон секцій */
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #ff80ab; /* Яскравий рожевий */
   border-radius: 5px;
 }
 
 label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
 }
 
 input, textarea {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
+  border: 1px solid #ff99b6; /* Світло-рожевий обвід */
+  border-radius: 4px;
   box-sizing: border-box;
+  background-color: #ffe6eb; /* Легкий рожевий */
 }
 
 button {
-  background-color: #4caf50;
-  color: white;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  color: white;
 }
 
 button:hover {
-  background-color: #45a049;
+  opacity: 0.9;
+}
+
+.btn-save {
+  background-color: #e91e63; /* Рожево-червоний */
+}
+
+.btn-edit {
+  background-color: #ff4081; /* Яскравий рожевий */
+  margin-right: 10px;
+}
+
+.btn-remove {
+  background-color: #d81b60; /* Темно-рожевий */
 }
 
 .post-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin-top: 10px;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border: 1px solid #ff80ab;
+  border-radius: 10px;
+  background-color: #ffe6eb; /* Легкий рожевий */
+  box-shadow: 0 4px 6px rgba(216, 27, 96, 0.2); /* Темно-рожевий тінь */
 }
 
-.post-item button {
-  margin-left: 10px;
-  background-color: #d9534f;
-  color: white;
-  border: none;
-  cursor: pointer;
+.post-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #d10068;
 }
 
-.post-item button:hover {
-  background-color: #c9302c;
+.post-description {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #8b004f;
+}
+
+.post-author {
+  font-size: 12px;
+  font-style: italic;
+  color: #ff4081;
+  margin-bottom: 12px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }
 </style>
